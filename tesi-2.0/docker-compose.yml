@@ -1,0 +1,35 @@
+services:
+  tesi-pipeline:
+    build: .
+    image: tesi2-pipeline:latest
+    volumes:
+      - ./data:/app/data:ro
+      - ${HOME}/mne_data:/mne_data:ro
+    environment:
+      - MNE_DATA=/mne_data
+      - PYTHONPATH=/app
+    command: >
+      python3 scripts/run_ml_age_sex_n179.py --n-perm 100 --n-boot 500
+    profiles: ["ml"]
+
+  tesi-tests:
+    build: .
+    image: tesi2-pipeline:latest
+    volumes:
+      - ./data:/app/data:ro
+      - ${HOME}/mne_data:/mne_data:ro
+    command: >
+      python3 -m pytest tests/test_ml_sex.py tests/test_ml_age.py
+      tests/test_config_schema.py -q -p no:warnings
+    profiles: ["test"]
+
+  tesi-dashboard:
+    build: .
+    image: tesi2-pipeline:latest
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data:ro
+      - ${HOME}/mne_data:/mne_data:ro
+    command: streamlit run dashboard/app.py --server.port=8501 --server.address=0.0.0.0
+    profiles: ["dashboard"]

@@ -1,0 +1,71 @@
+# Selly F1 Sandbox — configurazione simulazione
+# Modifica qui per tune threshold e nicchie prima di F2 live.
+
+sandbox:
+  n_trades_target: 30
+  mock_hold_days: 14
+  output_dir: "data/sandbox_results"
+
+arbitrage:
+  threshold_roi: 1.0          # ROI minimo per passare al mock execution
+  fees_marketplace_rate: 0.13 # 13% fee media eBay/Vinted
+  shipping_eur: 5.0
+  vat_rate_it: 0.22
+
+nicchie:
+  salute:
+    keywords:
+      - "integratori collagene"
+      - "olio CBD"
+      - "cerotti magnetici"
+      - "fascia lombare"
+      - "massaggiatore elettrico"
+      - "guanti anti artrite"
+      - "cerotto silicone cicatrice"
+      - "solette ortopediche"
+  sport:
+    keywords:
+      - "elastici fitness"
+      - "rullo foam roller"
+      - "grip palestra"
+      - "jump rope"
+      - "ginocchiera sportiva"
+      - "cintura pesi"
+      - "corda allenamento"
+      - "tappetino yoga"
+  beauty:
+    keywords:
+      - "siero vitamina C"
+      - "maschera viso tessuto"
+      - "curling wand"
+      - "spazzola levigante"
+      - "detergente konjac"
+      - "rullo jade viso"
+      - "strumento gua sha"
+      - "patch occhiaie"
+
+scrapers:
+  vinted:
+    rate_limit_s: 3.0
+    enabled: true
+  google_trends:
+    rate_limit_s: 5.0
+    enabled: true
+  tiktok:
+    rate_limit_s: 4.0
+    enabled: true
+  x_search:
+    rate_limit_s: 3.0
+    enabled: true
+  ebay:
+    rate_limit_s: 2.0
+    enabled: true  # richiede EBAY_APP_ID in .env
+  bigbuy:
+    rate_limit_s: 1.5
+    enabled: true  # richiede BIGBUY_API_KEY in .env
+
+statistical:
+  bootstrap_n_iter: 1000
+  bootstrap_seed: 42
+  calibration_accuracy_threshold: 0.6
+  calibration_p_threshold: 0.05

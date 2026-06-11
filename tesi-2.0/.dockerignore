@@ -1,0 +1,16 @@
+# Esclude dati pesanti e file temporanei dal build context Docker
+data/
+.planning/
+.git/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+reports/coverage.json

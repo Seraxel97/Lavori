@@ -1,0 +1,16 @@
+# Requirements Docker — subset essenziale per pipeline ML (no MNE-bids-pipeline opzionale)
+# Python 3.11-slim compatible — pinned per ripetibilità
+
+numpy==2.4.4
+scipy==1.17.1
+scikit-learn==1.8.0
+pandas==3.0.2
+matplotlib==3.10.8
+joblib==1.5.3
+mne==1.11.0
+mne-connectivity==0.8
+nibabel==5.4.2
+networkx
+statsmodels
+streamlit
+plotly

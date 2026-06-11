@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tesi.local/config.schema.json",
+  "title": "Tesi_2.0 pipeline config",
+  "description": "Schema per i parametri mne-bids-pipeline rilevanti (step 1-2).",
+  "type": "object",
+  "required": ["subjects", "task", "ch_types", "conditions"],
+  "additionalProperties": true,
+  "properties": {
+    "subjects": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Lista ID soggetti (es. ['05', '06'])."
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Task BIDS (es. 'matchingpennies')."
+    },
+    "ch_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["eeg", "meg", "grad", "mag", "eog", "ecg", "emg", "misc"]
+      },
+      "minItems": 1,
+      "description": "Tipi di canale da analizzare."
+    },
+    "conditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Condizioni sperimentali (es. ['raised-left', 'raised-right'])."
+    },
+    "l_freq": {
+      "oneOf": [
+        { "type": "number", "minimum": 0 },
+        { "type": "null" }
+      ],
+      "description": "Frequenza di taglio passa-alto (Hz). Null = no highpass."
+    },
+    "h_freq": {
+      "oneOf": [
+        { "type": "number", "minimum": 0 },
+        { "type": "null" }
+      ],
+      "description": "Frequenza di taglio passa-basso (Hz). Null = no lowpass."
+    },
+    "reject": {
+      "type": "object",
+      "additionalProperties": { "type": "number", "minimum": 0 },
+      "description": "Soglie reject epoch per tipo canale (es. {\"eeg\": 150e-6})."
+    },
+    "inverse_method": {
+      "type": "string",
+      "enum": ["dSPM", "MNE", "sLORETA", "eLORETA"],
+      "description": "Metodo inverse operator per source reconstruction."
+    },
+    "spacing": {
+      "type": "string",
+      "enum": ["oct5", "oct6", "ico4", "ico5"],
+      "description": "Spaziatura source space (es. 'oct6')."
+    },
+    "loose": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Loose orientation constraint (0=fixed, 1=free)."
+    },
+    "depth": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Depth weighting exponent per inverse."
+    },
+    "noise_cov": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "object" },
+        { "type": "null" }
+      ],
+      "description": "Noise covariance ('ad-hoc', path, o dict parametri)."
+    }
+  }
+}
