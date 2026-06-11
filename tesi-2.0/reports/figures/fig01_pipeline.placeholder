@@ -1,0 +1,35 @@
+# Fig. 01 — Pipeline Overview Diagram
+
+**Status**: pending
+
+## Caption draft
+
+Figure 1. End-to-end pipeline for EEG source-level functional connectivity classification.
+Raw EEG recordings (BIDS format) undergo preprocessing via MNE-BIDS-Pipeline (filtering,
+epoching, artefact rejection). Source reconstruction projects the signal onto the cortical
+surface using a dSPM inverse operator with fsaverage template (oct6, 8196 vertices).
+Parcellation aggregates source estimates into ROI time courses using four atlases
+(Desikan-Killiany 68 ROI, Destrieux 148, Schaefer-100, Schaefer-200). Spectral functional
+connectivity is computed for seven metrics across five frequency bands. Features are
+assembled into a classification matrix X and evaluated with GroupKFold cross-validation
+(five algorithms). Balanced accuracy is reported with permutation-based significance testing.
+
+## Source data
+
+- Pipeline steps: `config/config_step2_source_matchingpennies.py`
+- Module references: `parcellation/extract_label_tc.py`, `connectivity/fc_dispatcher.py`,
+  `features/dispatcher.py`, `ml_training/ml_dispatcher.py`
+- No data file required — schematic diagram.
+
+## Generation tool
+
+- Primary: draw.io / tikz (manual diagram) OR matplotlib (programmatic flow chart)
+- Fallback: `dashboard/plot_top_features.py` (pipeline schematic function TBD in S-11)
+- Output: `reports/figures/fig01_pipeline.png` (300 dpi, width 180mm for two-column IEEE)
+
+## Notes
+
+- Include 7-step numbered boxes: Preprocessing → Source Recon → Parcellation → FC →
+  Features → Classification → Validation
+- Color-code by module: blue = MNE core, green = custom modules, orange = ML
+- No font smaller than 8pt in final PNG

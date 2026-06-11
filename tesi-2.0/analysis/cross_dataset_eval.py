@@ -14,8 +14,8 @@ import sys
 from pathlib import Path
 
 import numpy as np
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import balanced_accuracy_score, mean_absolute_error
 from sklearn.preprocessing import StandardScaler
 
@@ -36,7 +36,7 @@ def load_ds005385(feat_name: str = FEAT_NAME):
     meta = json.loads((DS005385_FEAT / "metadata.json").read_text())
     subjects_list = meta["subjects"]  # lista dei label "sub-XXX_EO", "sub-XXX_EC"
     n_samples = meta.get("n_samples", X.shape[0])
-    n_subjects = meta.get("n_subjects", n_samples // 2)
+    _n_subjects = meta.get("n_subjects", n_samples // 2)
 
     # Estrai subject ID unici (senza _EO/_EC)
     unique_subs = []
@@ -97,8 +97,9 @@ def run_transfer():
     print(f"Transfer age MAE = {mae_age:.2f} anni")
 
     # In-dataset baseline (train=test, leave-one-sub-out stima approssimata)
+    from sklearn.metrics import balanced_accuracy_score as bac
+    from sklearn.metrics import mean_absolute_error as mae_fn
     from sklearn.model_selection import GroupKFold
-    from sklearn.metrics import balanced_accuracy_score as bac, mean_absolute_error as mae_fn
     groups_tr = np.load(DS005385_FEAT / "groups.npy")
     cv = GroupKFold(n_splits=5)
     bas_in, maes_in = [], []

@@ -1,0 +1,35 @@
+{
+  "_meta": {
+    "source_sprint": "S-48",
+    "worker": "sonnet2-ts",
+    "date": "2026-05-01",
+    "subject": "sub-05",
+    "atlas": "aparc",
+    "metric": "wpli",
+    "n_epochs": 20,
+    "n_labels": 68,
+    "n_times": 351,
+    "sfreq": 500,
+    "updated": "2026-05-05",
+    "update_sprint": "S-PERF-INVPARC",
+    "update_worker": "sonnet-tesi-2"
+  },
+  "measured_s": {
+    "load_epochs": 0.062,
+    "build_y": 0.001,
+    "inverse_parcellation": 1.533,
+    "functional_connectivity": 0.316,
+    "feature_extraction": 0.191,
+    "ml_training": 3.797,
+    "total": 5.976,
+    "inverse_parcellation_old": 5.49
+  },
+  "thresholds_s": {
+    "_note": "Synthetic-data CI thresholds (\u00d710 measured, n_epochs=20, n_labels=12, 1 band, 1 algo, 2 folds)",
+    "functional_connectivity": 3.0,
+    "feature_extraction": 2.0,
+    "ml_single_algo_2fold": 3.0,
+    "e2e_synthetic_total": 8.0,
+    "inverse_parcellation": 2.5
+  }
+}

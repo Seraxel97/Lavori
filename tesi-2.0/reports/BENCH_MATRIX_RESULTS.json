@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "dataset": "matchingpennies",
+    "subject": "sub-05",
+    "n_runs": 700,
+    "status": "placeholder \u2014 eseguire run_bench_matrix.py per risultati reali",
+    "note": "700 run = 7 metric \u00d7 4 atlas \u00d7 5 algo \u00d7 5 bande"
+  },
+  "runs": []
+}

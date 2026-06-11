@@ -1,0 +1,51 @@
+{
+  "feat_name": "X_aparc_plv_theta",
+  "n_samples": 200,
+  "n_subjects": 100,
+  "n_features_baseline": 2278,
+  "n_features_gt": 8,
+  "gt_feature_names": [
+    "clustering_coeff",
+    "global_efficiency",
+    "local_efficiency",
+    "mean_degree",
+    "mean_strength",
+    "modularity_q",
+    "path_length",
+    "small_worldness"
+  ],
+  "comparisons": {
+    "sex_baseline": {
+      "metric": "ba_mean",
+      "score": 0.713204156954157,
+      "null_mean": 0.5065105827995534,
+      "p_raw": 0.0196078431372549,
+      "p_fdr": 0.026143790849673203,
+      "significant_fdr": true
+    },
+    "sex_gt": {
+      "metric": "ba_mean",
+      "score": 0.7062208624708626,
+      "null_mean": 0.49962653384197503,
+      "p_raw": 0.0196078431372549,
+      "p_fdr": 0.026143790849673203,
+      "significant_fdr": true
+    },
+    "age_baseline": {
+      "metric": "r2",
+      "score": 0.09716045218045821,
+      "null_mean": -0.05330915210144141,
+      "p_raw": 0.0196078431372549,
+      "p_fdr": 0.026143790849673203,
+      "significant_fdr": true
+    },
+    "age_gt": {
+      "metric": "r2",
+      "score": -0.22201751260615143,
+      "null_mean": -0.1597822751806421,
+      "p_raw": 0.8627450980392157,
+      "p_fdr": 0.8627450980392157,
+      "significant_fdr": false
+    }
+  }
+}

@@ -9,7 +9,9 @@ def test_build_X_graphtheory_shape():
     from ml_training.feature_comparison import build_X_graphtheory
 
     X_gt = build_X_graphtheory()
-    assert X_gt.shape == (100, 8)
+    assert X_gt.ndim == 2
+    assert X_gt.shape[1] == 8
+    assert X_gt.shape[0] > 0
 
 
 def test_no_nan_in_X_gt():

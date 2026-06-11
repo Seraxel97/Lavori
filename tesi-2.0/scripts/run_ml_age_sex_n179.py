@@ -27,10 +27,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import balanced_accuracy_score, mean_absolute_error, r2_score
-from sklearn.model_selection import GroupKFold, GridSearchCV
+from sklearn.model_selection import GridSearchCV, GroupKFold
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -274,7 +274,7 @@ def write_report(results: dict, path: Path) -> None:
         "",
         f"**Data**: {ts}",
         f"**Coorte**: ds005385 N={ns} (whitelist determinististica seed=43)",
-        f"**Feature winner**: X_aparc_plv_theta (2278-dim PLV theta aparc)",
+        "**Feature winner**: X_aparc_plv_theta (2278-dim PLV theta aparc)",
         f"**Protocollo**: GroupKFold K=5 outer / K=3 inner, perm subject-level n={sx['n_perm']}, "
         f"boot cluster-subject n={sx['n_boot']}",
         "",
@@ -287,7 +287,7 @@ def write_report(results: dict, path: Path) -> None:
         f"| Null BA (mean) | {sx['null_ba_mean']:.3f} | — | — |",
         "",
         f"Significativo (α=0.05): **{'SÌ' if sx['p_perm'] < 0.05 else 'NO'}**",
-        f"Letteratura (Kollia 2022, N=100): BA≈0.70-0.75. N=100 FASE 1: BA=0.713.",
+        "Letteratura (Kollia 2022, N=100): BA≈0.70-0.75. N=100 FASE 1: BA=0.713.",
         "",
         "## 2. Regressione Età — baseline 2278-dim",
         "",
@@ -299,7 +299,7 @@ def write_report(results: dict, path: Path) -> None:
         f"| p_perm (R²) | {ag['p_perm']:.4f} | — |",
         "",
         f"Significativo (α=0.05): **{'SÌ' if ag['p_perm'] < 0.05 else 'NO'}**",
-        f"Letteratura (Franck 2019, N>200): MAE≈8-12 anni. N=100 FASE 1: MAE=12.52.",
+        "Letteratura (Franck 2019, N>200): MAE≈8-12 anni. N=100 FASE 1: MAE=12.52.",
         "",
         "## 3. Graph-Theory 8-dim vs Baseline — FDR-BH",
         "",

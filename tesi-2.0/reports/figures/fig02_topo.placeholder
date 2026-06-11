@@ -1,0 +1,39 @@
+# Fig. 02 — EEG Topoplot (Raw Sensor Level)
+
+**Status**: pending
+
+## Caption draft
+
+Figure 2. Sensor-level EEG topographies for the matching pennies paradigm (sub-05).
+(A) Grand-average evoked response for raised-left (blue) and raised-right (red) conditions,
+time-locked to stimulus onset. Shaded region indicates 95% confidence interval across trials.
+(B) Topographic distribution of the condition contrast (raised-left minus raised-right)
+at peak latency (approximately 200--400 ms post-stimulus), showing contralateral lateralisation
+consistent with motor preparation. Electrode positions follow the 10--20 international system;
+10 electrodes (FC5, FC1, C3, CP5, CP1, FC2, FC6, C4, CP2, CP6).
+
+## Source data
+
+- Evoked file: `data/derivatives/mne-bids-pipeline/sub-05/eeg/sub-05_task-matchingpennies_ave.fif`
+- Conditions: `raised-left`, `raised-right`, contrast `(raised-left) - (raised-right)`
+- Time window for topomap: 0.2--0.4 s post-stimulus
+
+## Generation tool
+
+```python
+# Pseudo-code for generation (dashboard/plot_top_features.py or standalone script)
+import mne
+evoked = mne.read_evokeds("sub-05_task-matchingpennies_ave.fif")
+fig, axes = plt.subplots(1, 3)
+evoked[0].plot_topomap(times=[0.25, 0.35], axes=axes, show=False)
+fig.savefig("reports/figures/fig02_topo.png", dpi=300)
+```
+
+- Library: `mne.viz.plot_evoked_topomap`, matplotlib
+- Output: `reports/figures/fig02_topo.png` (300 dpi, width 90mm single-column)
+
+## Notes
+
+- Requires `eeg_template_montage = "standard_1020"` applied before plotting
+- Add colorbar with unit label (amplitude in microvolts)
+- Panel A: waveform, Panel B: topomap contrast

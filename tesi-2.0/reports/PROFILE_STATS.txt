@@ -1,0 +1,38 @@
+         2569306 function calls (2454233 primitive calls) in 8.825 seconds
+
+   Ordered by: cumulative time
+   List reduced from 3590 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.004    0.004    8.825    8.825 /home/seraxel/Scrivania/Tesi_2.0/analysis/profile_bench.py:54(_bench_subset)
+       20    0.000    0.000    4.090    0.205 /home/seraxel/Scrivania/Tesi_2.0/parcellation/extract_label_tc.py:78(extract_tc)
+       20    0.000    0.000    3.576    0.179 <decorator-gen-313>:1(extract_label_time_course)
+       20    0.001    0.000    3.572    0.179 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/source_estimate.py:3747(extract_label_time_course)
+       40    0.064    0.002    3.571    0.089 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/source_estimate.py:3653(_gen_extract_label_time_course)
+       20    0.000    0.000    3.476    0.174 <decorator-gen-398>:1(apply_inverse)
+       20    0.000    0.000    3.472    0.174 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/minimum_norm/inverse.py:909(apply_inverse)
+       20    0.712    0.036    3.471    0.174 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/minimum_norm/inverse.py:1039(_apply_inverse)
+       20    0.029    0.001    3.353    0.168 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/source_estimate.py:3426(_prepare_label_extraction)
+     2732    0.057    0.000    2.968    0.001 /home/seraxel/miniconda3/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:666(intersect1d)
+     6314    0.013    0.000    2.677    0.000 /home/seraxel/miniconda3/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:145(unique)
+     6314    0.032    0.000    2.658    0.000 /home/seraxel/miniconda3/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:350(_unique1d)
+     5973    2.139    0.000    2.139    0.000 {built-in method numpy._core._multiarray_umath._unique_hash}
+       20    0.000    0.000    2.119    0.106 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/minimum_norm/inverse.py:581(_check_or_prepare)
+       20    0.000    0.000    2.119    0.106 <decorator-gen-396>:1(prepare_inverse_operator)
+       20    1.992    0.100    2.119    0.106 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/minimum_norm/inverse.py:596(prepare_inverse_operator)
+     1360    0.047    0.000    1.716    0.001 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/label.py:1448(label_sign_flip)
+    16905    0.732    0.000    0.732    0.000 {method 'sort' of 'numpy.ndarray' objects}
+        4    0.000    0.000    0.533    0.133 /home/seraxel/Scrivania/Tesi_2.0/connectivity/fc_dispatcher.py:47(compute_fc)
+        4    0.000    0.000    0.532    0.133 <decorator-gen-315>:1(spectral_connectivity_epochs)
+        4    0.002    0.000    0.531    0.133 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne_connectivity/spectral/epochs.py:772(spectral_connectivity_epochs)
+       20    0.001    0.000    0.513    0.026 /home/seraxel/Scrivania/Tesi_2.0/parcellation/extract_label_tc.py:56(get_labels)
+       20    0.000    0.000    0.509    0.025 <decorator-gen-359>:1(read_labels_from_annot)
+       20    0.279    0.014    0.507    0.025 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/label.py:2248(read_labels_from_annot)
+       40    0.436    0.011    0.437    0.011 /home/seraxel/miniconda3/lib/python3.13/site-packages/mne/minimum_norm/inverse.py:532(combine_xyz)
+ 1020/355    0.003    0.000    0.421    0.001 <frozen importlib._bootstrap>:1349(_find_and_load)
+   386/11    0.001    0.000    0.419    0.038 <frozen importlib._bootstrap>:1304(_find_and_load_unlocked)
+    357/9    0.001    0.000    0.418    0.046 <frozen importlib._bootstrap>:911(_load_unlocked)
+    289/9    0.001    0.000    0.417    0.046 <frozen importlib._bootstrap_external>:1017(exec_module)
+   878/19    0.000    0.000    0.414    0.022 <frozen importlib._bootstrap>:480(_call_with_frames_removed)
+
+

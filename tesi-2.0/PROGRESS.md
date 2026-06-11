@@ -1,8 +1,8 @@
 # Tesi_2.0 — Tracking progresso
 
 **Path**: `/home/seraxel/Scrivania/Tesi_2.0/`
-**Ultimo aggiornamento**: 2026-05-07 (Fase 2 Cleanup DONE, sonnet1-tesi)
-**HEAD**: cb29346 (Fase 2 cleanup done)
+**Ultimo aggiornamento**: 2026-06-11 (FASE 3 N=179 CLOSED — closure audit, opus-orch-tesi)
+**HEAD**: 338a222 (chore(tesi-fase3): night-closure 2026-06-05 — FASE 3 N=179 COMPLETE)
 
 ---
 
@@ -16,9 +16,12 @@
 | 4 | Connettività funzionale (wPLI, bande) | ✅ DONE | 2026-05-01 | `connectivity/fc_dispatcher.py` |
 | 5 | Feature extraction (mne-features + FC flatten) | ✅ DONE | 2026-05-01 | `features/dispatcher.py` |
 | 6 | ML classification (LOSO GroupKFold, 5 algo) | ✅ DONE | 2026-05-01 | `ml_training/ml_dispatcher.py` |
-| 7 | E2E su dataset scientifico | ❌ BLOCKED | — | Attesa Q1 (dataset scientifico) |
+| 7 | E2E su dataset scientifico (ds005385 N=179) | ✅ DONE | 2026-06-05 | `data/results/ds005385/ml_age_sex_n179.json` |
 
-**E2E smoke su matchingpennies** (sub-05): ✅ PASS — 8 epoch, aparc, wpli, 10s wall. Vedi `tests/test_integration_final.py`.
+**E2E smoke** (2026-06-11):
+- `test_mock_dataset_smoke` (mock_eceo BIDS): ✅ PASS — genera 2 sub, valida struttura BIDS
+- `test_e2e_matchingpennies_full`: ⏭ SKIP (derivs sub-05 assenti su questa macchina — expected)
+- Dataset scientifico N=179: ✅ pipeline completata 2026-06-05T00:03 — output `ml_age_sex_n179.json` presente
 
 ---
 
@@ -41,7 +44,8 @@ Vedi `.planning/SESSION_SUMMARY_2026-05-01.md` per il dettaglio completo.
 
 | # | Tema | Stato | Urgenza |
 |---|------|-------|---------|
-| Q1 | Dataset scientifico finale (ds005385 vs LEMON) | 🔴 APERTA | **URGENTE** — blocca Step 7 |
+| Q1 | Dataset scientifico finale (ds005385 vs LEMON) | ✅ CHIUSA | ds005385 scelto, N=179 completato |
+| PR#3 | Approva Raccomandazione D (pivot framing + FASE 3 in-dataset) | 🔴 APERTA | Operatore deve mergiare o chiudere |
 
 Tutte le altre decisioni (Q2–Q7) sono state chiuse autonomamente con default reversibili.
 
@@ -113,11 +117,13 @@ Tutte le altre decisioni (Q2–Q7) sono state chiuse autonomamente con default r
 
 ---
 
-## Prossimi passi
+## Prossimi passi (chiusura progetto)
 
-1. **Wave-scientific** → S-101 PILOT 5 sub (gated OPERATOR_APPROVE_5SUB) → S-103→S-107 step-by-step
-2. **Performance P0** → refactor `inverse_parcellation` con `apply_inverse_epochs()` batch (riduzione ~40%)
-3. Q1 risolta (2026-05-01): ds005385 scelto, subset N=15, seed=42
+1. **PR #3** → operatore decide merge/close (Raccomandazione D approvata?)
+2. **Discussion + Conclusion** (R-TESI-2.0-DISCUSSION-CONCLUSION, queue pending) — scrittura su risultati N=179
+3. **Dashboard aggiornamento ML** (R-TESI-2.0-DASHBOARD-ML-SCIENTIFICA) — tab ML con FASE 3 N=179
+4. **Audit pre-professore** (R-TESI-2.0-AUDIT-PRE-PROFESSORE, deps su 2+3)
+5. Fix minori: `pip install specparam` + config ds005385 N=179 step1/step2
 
 ---
 
@@ -258,3 +264,46 @@ Vedi `.planning/MSG_TO_FATHER_N30_DONE.md` per dettaglio cronologia rerun + cave
 ### Riferimenti
 - `reports/STATISTICAL_VALIDITY_NOTES.md` — sommario validità scientifica
 - `reports/EXPERIMENTS_N50.md` — HARKing disclosure + FDR-BH table
+
+---
+
+## 2026-06-05 — FASE 3 N=179 COMPLETE (commit 338a222)
+
+**Pipeline**: steps 1-6 su ds005385, N=179 soggetti, feat=`X_aparc_plv_theta`
+**Commit chiusura**: `338a222` (night-closure 2026-06-05)
+
+### Risultati ML N=179
+
+| Target | Metrica | Valore | CI 95% | p_perm | Significativo |
+|--------|---------|--------|--------|--------|---------------|
+| Sesso | BA | **0.795** | [0.744, 0.843] | 0.001 (p_fdr=0.0013) | ✅ sì |
+| Età | MAE | **12.26 anni** | [11.31, 13.32] | 0.001 (p_fdr=0.0013) | ✅ sì |
+| Sesso | R² | — | — | — | — |
+| Età | R² | 0.082 | [-0.014, 0.154] | — | marginal |
+
+**GT (graph-theory only)**:
+
+| Target | Metrica | Valore |
+|--------|---------|--------|
+| Sesso | BA | 0.656 (p_perm=0.001) |
+| Età | MAE | 14.18 |
+
+### Parametri protocollo
+
+| Param | Valore |
+|-------|--------|
+| N soggetti | 179 |
+| N campioni | 358 (EO+EC) |
+| outer_k | 5 (GroupKFold) |
+| n_perm | 1000 (subject-level) |
+| n_boot | 1000 (cluster subject-level) |
+| Tempo ML sex | 78 min |
+| Tempo ML age | 263 min |
+
+### Contesto scientifico
+
+- Baseline sex (chance): BA=0.499 — delta +0.296 sopra chance
+- Feature vincente: aparc × PLV × theta (68 ROI, wPLI proxy)
+- BA sex 0.795 in linea con FASE 1 N=15 (0.867) e letteratura (Kollia 2022: 0.70-0.75)
+- Age MAE 12.26 anni su range ~20-70 anni: modesto ma significativo
+- Docker container prodotto per riproducibilità (step 3.7)

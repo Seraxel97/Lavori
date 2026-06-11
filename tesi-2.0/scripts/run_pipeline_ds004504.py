@@ -363,7 +363,7 @@ def run_fc_features() -> None:
     print(f"[ds004504 step4b] {len(subjects_done)} sub con label_ts disponibili")
     write_hb("step4b_start", f"{len(subjects_done)} subs")
     step4b_fc(subjects_done)
-    write_hb("step4b_done", f"FC computed")
+    write_hb("step4b_done", "FC computed")
     step5_features(subjects_done)
     write_hb("step5_done", f"Features extracted for {len(subjects_done)} subs")
 
@@ -374,7 +374,7 @@ def main() -> None:
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--skip-to-fc", action="store_true")
-    args = parser.parse_args()
+    _args = parser.parse_args()
 
     subjects = SUBJECTS_DS004504
     print(f"[ds004504] Processing {len(subjects)} subjects — step2+2b+3b")
@@ -395,7 +395,7 @@ def main() -> None:
         stcs_npz = _stcs_npz(sub, "EC")
         if stcs_npz.exists():
             stcs_npz.unlink()
-            print(f"  [cleanup] stcs.npz rimosso — disco preservato")
+            print("  [cleanup] stcs.npz rimosso — disco preservato")
 
     print("\n✅ Pipeline step 2.2 complete")
 

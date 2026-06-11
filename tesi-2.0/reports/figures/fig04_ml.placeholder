@@ -1,0 +1,43 @@
+# Fig. 04 — ML Results: Confusion Matrix and ROC Curves
+
+**Status**: pending
+
+## Caption draft
+
+Figure 4. Classification results for the best-performing configuration (atlas, metric, band
+and algorithm to be determined from reports/BENCH_MATRIX_RESULTS.json after full benchmark
+execution). (A) Aggregated confusion matrix across GroupKFold folds (k=5, multi-subject
+dataset). Values are counts; colour intensity proportional to cell frequency. Rows are true
+labels, columns are predicted labels. (B) Receiver Operating Characteristic (ROC) curve
+for the best classifier, averaged across folds (solid line) with fold variability shown as
+shaded band (mean +/- std AUC). Dashed line indicates chance level (AUC=0.50). The inset
+reports balanced accuracy (BA), AUC, and permutation p-value (FDR-corrected, 1000 permutations).
+
+## Source data
+
+- Primary source: `reports/BENCH_MATRIX_RESULTS.json` (pending full benchmark run on multi-subject dataset)
+- CV results: `ml_training/ml_dispatcher.CVResult` objects (ba_per_fold, confusion matrix)
+- Permutation p-values: `ml_training/permutation.PermutationResult`
+
+## Generation tool
+
+```python
+# Pseudo-code
+from sklearn.metrics import ConfusionMatrixDisplay, RocCurveDisplay
+import matplotlib.pyplot as plt
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+ConfusionMatrixDisplay(cm_agg, display_labels=["raised-left", "raised-right"]).plot(ax=ax1)
+# ROC: aggregate per fold, plot mean +/- std
+fig.savefig("reports/figures/fig04_ml.png", dpi=300)
+```
+
+- Library: sklearn.metrics, matplotlib
+- Output: `reports/figures/fig04_ml.png` (300 dpi, width 180mm)
+
+## Notes
+
+- Requires multi-subject dataset results (S-07 + S-08 full run)
+- Placeholder numbers from smoke test (N=1) are NOT suitable for this figure
+- Include permutation null distribution inset if space allows
+- ROC curve: use probability outputs (SVC with probability=True, LogReg default)
